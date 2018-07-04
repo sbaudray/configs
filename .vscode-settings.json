@@ -1,0 +1,44 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.cursorStyle": "block",
+  "editor.detectIndentation": true,
+  "editor.fontFamily": "'Hasklig',  'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80, 100],
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
+  "files.exclude": {
+    ".elixir_ls/**": true,
+    "_build": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "keyboard.dispatch": "keyCode",
+  "openInGitHub.defaultBranch": "dev",
+  "openInGitHub.defaultRemote": "origin",
+  "postcssSorting.config": {
+    "properties-order": "alphabetical"
+  },
+  "telemetry.enableTelemetry": false,
+  "vim.disableExtension": false,
+  "vim.useCtrlKeys": false,
+  "workbench.activityBar.visible": false,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#8d8972f6"
+  },
+  "workbench.colorTheme": "papercolor-vscode",
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.showIcons": false,
+  "workbench.iconTheme": null,
+  "window.title": "${dirty}${activeEditorMedium}"
+}
