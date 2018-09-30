@@ -35,7 +35,7 @@
   "workbench.colorCustomizations": {
     "statusBar.background": "#8d8972f6"
   },
-  "workbench.colorTheme": "papercolor-vscode",
+  "workbench.colorTheme": "Gatito Theme",
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,
