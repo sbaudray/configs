@@ -40,5 +40,6 @@
   "workbench.editor.labelFormat": "short",
   "workbench.editor.showIcons": false,
   "workbench.iconTheme": null,
+  "workbench.settings.editor": "ui",
   "window.title": "${dirty}${activeEditorMedium}"
 }
