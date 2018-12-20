@@ -15,9 +15,6 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#16151a"
-    background_image = None
-    font = Source Code Pro for Powerline 10
-    foreground_color = "#ffffff"
-    show_titlebar = False
+    cursor_color = "#aaaaaa"
+    font = Hasklig 12
     use_system_font = False
