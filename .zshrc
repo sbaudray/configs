@@ -1,6 +1,6 @@
 export ZSH=/home/sbaudray/.oh-my-zsh
 
-plugins=(git vi-mode history-substring-search)
+plugins=(git history-substring-search)
 
 ZSH_THEME="agnoster"
 DEFAULT_USER=`whoami`
