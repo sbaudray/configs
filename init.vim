@@ -49,6 +49,9 @@ nnoremap / /\v
 " switch to last buffer
 nnoremap <Leader><Leader> <C-^>
 
+noremap <Leader>p "+p
+noremap <Leader>y "+y
+
 " fuzzy find non gitignored files
 nnoremap <C-p> :GFiles<CR>
 
@@ -61,6 +64,7 @@ nnoremap K <nop>
 let g:deoplete#enable_at_startup=1
 
 let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier', 'eslint'],
       \}
 let g:ale_fix_on_save = 1
