@@ -114,7 +114,3 @@ set ignorecase
 set smartcase
 
 set mouse=a
-
-function! GitBranch()
-  return fugitive#head()
-endfunction
