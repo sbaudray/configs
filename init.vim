@@ -16,6 +16,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'slashmili/alchemist.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 set noswapfile
@@ -91,7 +96,8 @@ endif
 
 syntax enable
 set background=dark
-colorscheme OceanicNext
+colorscheme jellybeans
+let g:airline_theme='jellybeans'
 
 set tabstop=2
 set softtabstop=2
@@ -102,7 +108,7 @@ set cursorline
 set number
 set relativenumber
 set guicursor=
-set guicursor=i:blinkwait300-blinkon400-blinkoff250
+set guicursor=i:bliqnkwait300-blinkon400-blinkoff250
 
 set ignorecase
 set smartcase
@@ -112,27 +118,3 @@ set mouse=a
 function! GitBranch()
   return fugitive#head()
 endfunction
-
-hi User1 guifg=#ffffff guibg=#6699cc
-hi User2 guifg=#6699cc guibg=#383838
-hi User3 guifg=#ffffff guibg=#383838
-hi User4 guifg=#333333 guibg=#383838
-hi User5 guifg=#ffffff guibg=#333333
-
-set statusline=
-set statusline+=%1*
-set statusline+=\ %{GitBranch()}
-set statusline+=\ %2*
-set statusline+=
-set statusline+=%3*
-set statusline+=\ %f
-set statusline+=%=
-set statusline+=%4*\ 
-set statusline+=%5*\ %y
-set statusline+=\ %{&fileencoding}
-set statusline+=\ ℓ
-set statusline+=%l
-set statusline+=/
-set statusline+=%L
-set statusline+=\ \|
-set statusline+=\ %c
