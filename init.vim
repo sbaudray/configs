@@ -84,9 +84,10 @@ colorscheme gruvbox
 let g:airline_powerline_fonts = 1
 
 set tabstop=2
-set softtabstop=2
+set softtabstop=0
 set shiftwidth=2
 set expandtab
+set smarttab
 
 set nohlsearch
 
