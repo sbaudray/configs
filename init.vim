@@ -21,6 +21,8 @@ Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mileszs/ack.vim'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 set noswapfile
@@ -30,42 +32,34 @@ let mapleader="\<Space>"
 nnoremap j gj
 nnoremap k gk
 
-" close all buffers but the active one
 nnoremap <Leader>o :only<CR>
 nnoremap <Leader>q :q<CR>
 
-" buffers management
-nnoremap <C-h> <c-w>h
-nnoremap <C-j> <c-w>j
-nnoremap <C-k> <c-w>k
-nnoremap <C-l> <c-w>l
 nnoremap <Leader>/ <c-w>=
 nnoremap <Leader><tab> <c-w>r
 
 " Vimrc save and source
 nnoremap <Leader>v :w<CR>:so%<CR>:<backspace>
 
-" clear highlight
-nnoremap <Leader><Esc> :noh<CR>:<backspace>
 
 " very magic searches
 cnoremap / /\v
 nnoremap / /\v
 
-" switch to last buffer
 nnoremap <Leader><Leader> <C-^>
 
-noremap <Leader>p "+p
-noremap <Leader>y "+y
-
-" fuzzy find non gitignored files
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-P> :Files<CR>
 
-" yank to the end of the line
+nnoremap <Leader>f :NERDTreeToggle<CR>
+
+nnoremap <Leader>a :Ack!<Space>
+
 nnoremap Y y$
 
 nnoremap Q <nop>
 nnoremap K <nop>
+
 
 let g:deoplete#enable_at_startup=1
 
@@ -79,38 +73,27 @@ let g:ale_sign_error = '●'
 
 let g:user_emmet_leader_key=','
 
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#mappings#manual_complete()
-
-
 if (has("termguicolors"))
 	set termguicolors
 endif
 
 syntax enable
 set background=dark
-colorscheme jellybeans
-let g:airline_theme='jellybeans'
+colorscheme gruvbox
+
+let g:airline_powerline_fonts = 1
 
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+set nohlsearch
+
 set cursorline
 set number
 set relativenumber
 set guicursor=
-set guicursor=i:bliqnkwait300-blinkon400-blinkoff250
-
-set ignorecase
-set smartcase
+set guicursor=i:blinkwait300-blinkon400-blinkoff250
 
 set mouse=a
