@@ -64,7 +64,6 @@ nnoremap K <nop>
 let g:deoplete#enable_at_startup=1
 
 let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier', 'eslint'],
       \}
 let g:ale_fix_on_save = 1
