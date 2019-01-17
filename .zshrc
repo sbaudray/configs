@@ -14,6 +14,7 @@ xmodmap ~/.keymapconfig
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export KEYTIMEOUT=1
 # export LANG=en_US.UTF-8
 # export ARCHFLAGS="-arch x86_64"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
