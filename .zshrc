@@ -19,6 +19,4 @@ export EDITOR="$VISUAL"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
-alias zshconfig="vim ~/.zshrc"
-alias sourcezsh="source ~/.zshrc"
 
