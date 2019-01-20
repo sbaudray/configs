@@ -28,6 +28,7 @@ Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 let mapleader="\<Space>"
+let maplocalleader=','
 
 nnoremap j gj
 nnoremap k gk
@@ -42,21 +43,22 @@ nnoremap Q <nop>
 nnoremap <Leader>o :only<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>x :x<CR>
+
+map <Leader>y "+y
+nnoremap <Leader>p "+p
+inoremap <C-r> <C-r>+
 
 nnoremap <Leader>/ <C-w>=
 nnoremap <Leader><Tab> <C-w>r
 nnoremap <Leader>_ <C-w>_
 
-nnoremap <Leader>v :w<CR>:so%<CR>:<backspace>
-
 nnoremap <Leader><Leader> <C-^>
-
 nnoremap <C-p> :GFiles<CR>
 
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
 nnoremap <Leader>a :Ack!<Space>
-
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
@@ -69,12 +71,14 @@ let g:neosnippet#disable_runtime_snippets = {
 call deoplete#custom#source('neosnippet', 'rank', 9999)
 
 imap <expr><Tab>
-	 \ pumvisible() ? "\<C-n>" :
-   \ neosnippet#expandable_or_jumpable() ?
-	 \ "\<Plug>(neosnippet_expand_or_jump)" :
-   \ "\<Tab>"
+      \ pumvisible() ? "\<C-n>" :
+      \ neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" :
+      \ "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "<S-Tab>"
 inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+autocmd BufWritePost init.vim so <sfile>
 
 let g:ale_fixers = {
       \ 'javascript': ['prettier', 'eslint'],
@@ -84,7 +88,7 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '●'
 
 let g:user_emmet_leader_key=','
- 
+
 let g:LanguageClient_serverCommands = {
     \ 'elixir': ['~/elixir-ls/rel/language_server.sh']
     \ }
@@ -93,15 +97,17 @@ let g:LanguageClient_rootMarkers = {
     \ }
 
 let g:airline_powerline_fonts = 1
+let g:airline_section_z = 'ℓ %l/%L : %c'
 
 if (has("termguicolors"))
-	set termguicolors
+  set termguicolors
 endif
 
 syntax enable
 set background=dark
 colorscheme gruvbox
 
+set clipboard=unnamed
 set noswapfile
 set hidden
 set tabstop=2
@@ -118,3 +124,4 @@ set relativenumber
 set guicursor=
 set guicursor=i:blinkwait300-blinkon400-blinkoff250
 set mouse=a
+set mps+=<:>
