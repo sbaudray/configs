@@ -40,7 +40,6 @@ nnoremap Y y$
 
 nnoremap Q <nop>
 
-nnoremap <Leader>o :only<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
