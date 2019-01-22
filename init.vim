@@ -25,6 +25,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 
 let mapleader="\<Space>"
@@ -55,7 +56,8 @@ nnoremap <Leader>_ <C-w>_
 nnoremap <Leader><Leader> <C-^>
 nnoremap <C-p> :GFiles<CR>
 
-nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeFind<CR>
+nnoremap <Leader>c :NERDTreeToggle<CR>
 
 nnoremap <Leader>a :Ack!<Space>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -79,8 +81,12 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 autocmd BufWritePost init.vim so <sfile>
 
+let g:ale_linters = {
+      \ 'javascript': ['flow', 'eslint'],
+      \}
 let g:ale_fixers = {
       \ 'javascript': ['prettier', 'eslint'],
+      \ 'scss': ['prettier'],
       \}
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
@@ -106,6 +112,7 @@ syntax enable
 set background=dark
 colorscheme gruvbox
 
+set autoread
 set clipboard=unnamed
 set noswapfile
 set hidden
