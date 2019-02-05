@@ -56,6 +56,8 @@ nnoremap <Leader>_ <C-w>_
 nnoremap <Leader><Leader> <C-^>
 nnoremap <C-p> :GFiles<CR>
 
+nnoremap <Leader>z :Goyo<CR>
+
 nnoremap <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>c :NERDTreeToggle<CR>
 
