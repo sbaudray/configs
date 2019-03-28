@@ -73,6 +73,8 @@ let g:neosnippet#disable_runtime_snippets = {
       \}
 call deoplete#custom#source('neosnippet', 'rank', 9999)
 
+nnoremap <Tab> <C-w>w
+nnoremap <S-Tab> <C-w>W
 imap <expr><Tab>
       \ pumvisible() ? "\<C-n>" :
       \ neosnippet#expandable_or_jumpable() ?
