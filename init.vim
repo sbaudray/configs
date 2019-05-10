@@ -25,7 +25,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 call plug#end()
 
 let mapleader="\<Space>"
@@ -45,10 +47,6 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
 
-map <Leader>y "+y
-nnoremap <Leader>p "+p
-inoremap <C-r> <C-r>+
-
 nnoremap <Leader>/ <C-w>=
 nnoremap <Leader><Tab> <C-w>r
 nnoremap <Leader>_ <C-w>_
@@ -61,10 +59,12 @@ nnoremap <Leader>z :Goyo<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>c :NERDTreeToggle<CR>
 
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>a :Gcd <bar> Ack!<Space>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" map <leader>b :g#\({\n\)\@<=#.,/}/sort<CR>)
 
 let g:deoplete#enable_at_startup=1
 let g:neosnippet#snippets_directory = '~/.config/nvim/snippets'
@@ -73,8 +73,8 @@ let g:neosnippet#disable_runtime_snippets = {
       \}
 call deoplete#custom#source('neosnippet', 'rank', 9999)
 
-nnoremap <Tab> <C-w>w
 nnoremap <S-Tab> <C-w>W
+nnoremap <Tab> <C-w>w
 imap <expr><Tab>
       \ pumvisible() ? "\<C-n>" :
       \ neosnippet#expandable_or_jumpable() ?
@@ -99,14 +99,15 @@ let g:ale_sign_error = '●'
 let g:user_emmet_leader_key=','
 
 let g:LanguageClient_serverCommands = {
-    \ 'elixir': ['~/elixir-ls/rel/language_server.sh']
-    \ }
+    \ 'elixir': ['~/elixir-ls/rel/language_server.sh'],
+   \}
 let g:LanguageClient_rootMarkers = {
     \ 'elixir': ['mix.exs'],
     \ }
 
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = 'ℓ %l/%L : %c'
+let g:goyo_width = 120
 
 if (has("termguicolors"))
   set termguicolors
@@ -116,7 +117,9 @@ syntax enable
 set background=dark
 colorscheme gruvbox
 
+set splitbelow splitright
 set autoread
+set autowrite
 set clipboard=unnamed
 set noswapfile
 set hidden
@@ -129,7 +132,6 @@ set nohlsearch
 set ignorecase
 set smartcase
 set cursorline
-set number
 set relativenumber
 set guicursor=
 set guicursor=i:blinkwait300-blinkon400-blinkoff250
