@@ -2,18 +2,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'w0rp/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'elixir-editors/vim-elixir'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mattn/emmet-vim'
-Plug 'metakirby5/codi.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
@@ -27,11 +21,14 @@ Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 let mapleader="\<Space>"
 let maplocalleader=','
+nmap <silent> <Leader>dd <Plug>(coc-type-definition)
+autocmd CursorHold * silent call CocAction('doHover')
+nnoremap ; :
 
 nnoremap j gj
 nnoremap k gk
@@ -43,6 +40,8 @@ nnoremap Y y$
 
 nnoremap Q <nop>
 
+nnoremap <Leader>sa gg<S-v>Gy
+nnoremap <Leader>b :b<Space>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
@@ -59,19 +58,12 @@ nnoremap <Leader>z :Goyo<CR>
 nnoremap <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>c :NERDTreeToggle<CR>
 
-nnoremap <Leader>a :Gcd <bar> Ack!<Space>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <Leader>lf :Ack<Space>
 
-" map <leader>b :g#\({\n\)\@<=#.,/}/sort<CR>)
-
-let g:deoplete#enable_at_startup=1
 let g:neosnippet#snippets_directory = '~/.config/nvim/snippets'
 let g:neosnippet#disable_runtime_snippets = {
       \ '_': 1,
       \}
-call deoplete#custom#source('neosnippet', 'rank', 9999)
 
 nnoremap <S-Tab> <C-w>W
 nnoremap <Tab> <C-w>w
@@ -85,25 +77,9 @@ inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 autocmd BufWritePost init.vim so <sfile>
 
-let g:ale_linters = {
-      \ 'javascript': ['flow', 'eslint'],
-      \}
-let g:ale_fixers = {
-      \ 'javascript': ['prettier', 'eslint'],
-      \ 'scss': ['prettier'],
-      \}
-let g:ale_fix_on_save = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '●'
+let g:ackprg = 'ag --vimgrep'
 
 let g:user_emmet_leader_key=','
-
-let g:LanguageClient_serverCommands = {
-    \ 'elixir': ['~/elixir-ls/rel/language_server.sh'],
-   \}
-let g:LanguageClient_rootMarkers = {
-    \ 'elixir': ['mix.exs'],
-    \ }
 
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = 'ℓ %l/%L : %c'
@@ -113,15 +89,29 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom set filetype=groff
+autocmd Filetype groff inoremap á \*[']a
+autocmd Filetype groff inoremap Á \*[']A
+autocmd Filetype groff inoremap é \*[']e
+autocmd Filetype groff inoremap É \*[']E
+autocmd Filetype groff inoremap í \*[']i
+autocmd Filetype groff inoremap Í \*[']I
+autocmd Filetype groff inoremap ó \*[']o
+autocmd Filetype groff inoremap Ó \*[']O
+autocmd Filetype groff inoremap ú \*[']u
+autocmd Filetype groff inoremap Ú \*[']U
+
 syntax enable
 set background=dark
 colorscheme gruvbox
-
+set updatetime=100
 set splitbelow splitright
 set autoread
 set autowrite
-set clipboard=unnamed
+set clipboard^=unnamed,unnamedplus
 set noswapfile
+set nobackup
+set nowritebackup
 set hidden
 set tabstop=2
 set softtabstop=0
