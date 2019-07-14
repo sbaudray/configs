@@ -150,7 +150,7 @@ set nohlsearch
 set ignorecase
 set smartcase
 set cursorline
-set relativenumber
+set number relativenumber
 set guicursor=
 set guicursor=i:blinkwait300-blinkon400-blinkoff250
 set mouse=a
