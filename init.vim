@@ -75,7 +75,7 @@ nnoremap <Leader><Tab> <C-w>r
 nnoremap <Leader>_ <C-w>_
 
 nnoremap <Leader><Leader> <C-^>
-nnoremap <C-p> :GFiles<CR>
+nnoremap <C-p> :Files<CR>
 nmap <C-Up> [e
 nmap <C-Down> ]e
 vmap <C-Up> [egv
