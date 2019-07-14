@@ -1,4 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'tpope/vim-rhubarb'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'cocopon/iceberg.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
@@ -22,12 +25,32 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 let mapleader="\<Space>"
 let maplocalleader=','
-nmap <silent> <Leader>dd <Plug>(coc-type-definition)
-autocmd CursorHold * silent call CocAction('doHover')
+nmap <silent> <Leader>rn <Plug>(coc-rename)
+" autocmd CursorHold * silent call CocActionAsync('doHover')
+"nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 nnoremap ; :
 
 nnoremap j gj
@@ -37,11 +60,12 @@ nnoremap / /\v
 cnoremap %s %s/\v
 
 nnoremap Y y$
+nnoremap ye ggyG<C-o>
 
 nnoremap Q <nop>
 
 nnoremap <Leader>sa gg<S-v>Gy
-nnoremap <Leader>b :b<Space>
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>x :x<CR>
@@ -52,6 +76,10 @@ nnoremap <Leader>_ <C-w>_
 
 nnoremap <Leader><Leader> <C-^>
 nnoremap <C-p> :GFiles<CR>
+nmap <C-Up> [e
+nmap <C-Down> ]e
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 nnoremap <Leader>z :Goyo<CR>
 
@@ -103,7 +131,7 @@ autocmd Filetype groff inoremap Ú \*[']U
 
 syntax enable
 set background=dark
-colorscheme gruvbox
+colorscheme iceberg
 set updatetime=100
 set splitbelow splitright
 set autoread
