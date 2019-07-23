@@ -60,7 +60,7 @@ nnoremap / /\v
 cnoremap %s %s/\v
 
 nnoremap Y y$
-nnoremap yf ggyG<C-o>
+nnoremap <Leader>yf ggyG<C-o>
 
 nnoremap Q <nop>
 
