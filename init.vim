@@ -110,6 +110,8 @@ let g:ackprg = 'ag --vimgrep'
 let g:user_emmet_leader_key=','
 
 let g:airline_powerline_fonts = 1
+let g:airline_skip_empty_sections = 1
+let g:airline_section_b =''
 let g:airline_section_z = 'ℓ %l/%L : %c'
 let g:goyo_width = 120
 
