@@ -1,9 +1,5 @@
-[user]
-	email = sebastien.baudray@hetic.net
-	name = sbaudray
 [push]
 	default = current
 [core]
 	excludesfile = ~/.gitignore.global
-[credential]
-	helper = cache --timeout=10800
+
