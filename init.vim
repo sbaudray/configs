@@ -1,46 +1,73 @@
-call plug#begin('~/.local/share/nvim/plugged')
-Plug 'tpope/vim-rhubarb'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'cocopon/iceberg.vim'
+call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'elixir-editors/vim-elixir'
-Plug 'pangloss/vim-javascript'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-unimpaired'
+Plug 'elixir-editors/vim-elixir'
+Plug 'tpope/vim-surround'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mattn/emmet-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 let mapleader="\<Space>"
-let maplocalleader=','
-nmap <silent> <Leader>rn <Plug>(coc-rename)
-" autocmd CursorHold * silent call CocActionAsync('doHover')
-"nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+let g:user_emmet_leader_key=','
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+" Silver searcher
+let g:ackprg = 'ag --vimgrep'
+
+nnoremap ; :
+nnoremap j gj
+nnoremap k gk
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>x :x<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>lf :Ack<Space>
+nnoremap <Leader><Leader> <C-^>
+nnoremap Y y$
+nnoremap / /\v
+cnoremap %s %s/\v
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>yf ggyG<C-o>
+
+" disable comments continuation
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+hi CursorLine cterm=none ctermbg=Black
+
+set noswapfile
+set termguicolors
+set ignorecase
+set smartcase
+set number relativenumber
+set nohlsearch
+set mouse=a
+set guicursor=
+set splitbelow
+set splitright
+
+" Coc 
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -51,109 +78,24 @@ function! s:show_documentation()
   endif
 endfunction
 
-nnoremap ; :
-
-nnoremap j gj
-nnoremap k gk
-
-nnoremap / /\v
-cnoremap %s %s/\v
-
-nnoremap Y y$
-nnoremap <Leader>yf ggyG<C-o>
-
-nnoremap Q <nop>
-
-nnoremap <Leader>sa gg<S-v>Gy
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>x :x<CR>
-
-nnoremap <Leader>/ <C-w>=
-nnoremap <Leader><Tab> <C-w>r
-nnoremap <Leader>_ <C-w>_
-
-nnoremap <Leader><Leader> <C-^>
-nnoremap <C-p> :Files<CR>
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-nnoremap <Leader>z :Goyo<CR>
-
-nnoremap <Leader>f :NERDTreeFind<CR>
-nnoremap <Leader>c :NERDTreeToggle<CR>
-
-nnoremap <Leader>lf :Ack<Space>
-
-let g:neosnippet#snippets_directory = '~/.config/nvim/snippets'
-let g:neosnippet#disable_runtime_snippets = {
-      \ '_': 1,
-      \}
-
-nnoremap <S-Tab> <C-w>W
-nnoremap <Tab> <C-w>w
-imap <expr><Tab>
+inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" :
-      \ "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "<S-Tab>"
-inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><CR> pumvisible() ? "\<c-y>" : "\<CR>"
 
-autocmd BufWritePost init.vim so <sfile>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-let g:ackprg = 'ag --vimgrep'
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+" end of coc
 
-let g:user_emmet_leader_key=','
-
-let g:airline_powerline_fonts = 1
-let g:airline_skip_empty_sections = 1
-let g:airline_section_b =''
-let g:airline_section_z = 'ℓ %l/%L : %c'
-let g:goyo_width = 120
-
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-autocmd BufRead,BufNewFile *.ms,*.me,*.mom set filetype=groff
-autocmd Filetype groff inoremap á \*[']a
-autocmd Filetype groff inoremap Á \*[']A
-autocmd Filetype groff inoremap é \*[']e
-autocmd Filetype groff inoremap É \*[']E
-autocmd Filetype groff inoremap í \*[']i
-autocmd Filetype groff inoremap Í \*[']I
-autocmd Filetype groff inoremap ó \*[']o
-autocmd Filetype groff inoremap Ó \*[']O
-autocmd Filetype groff inoremap ú \*[']u
-autocmd Filetype groff inoremap Ú \*[']U
-
-syntax enable
-set background=dark
 colorscheme iceberg
-set updatetime=100
-set splitbelow splitright
-set autoread
-set autowrite
-set clipboard^=unnamed,unnamedplus
-set noswapfile
-set nobackup
-set nowritebackup
-set hidden
-set tabstop=2
-set softtabstop=0
-set shiftwidth=2
-set expandtab
-set smarttab
-set nohlsearch
-set ignorecase
-set smartcase
-set cursorline
-set number relativenumber
-set guicursor=
-set guicursor=i:blinkwait300-blinkon400-blinkoff250
-set mouse=a
-set mps+=<:>
+set background=dark
