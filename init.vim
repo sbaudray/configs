@@ -21,6 +21,8 @@ Plug 'fxn/vim-monochrome'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " languages
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'jparise/vim-graphql'
 Plug 'elixir-editors/vim-elixir'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
@@ -69,6 +71,7 @@ nnoremap <Leader>lf :Ack<Space>
 nnoremap <Leader><Leader> <C-^>
 nnoremap Y y$
 nnoremap <C-p> :Files<CR>
+nnoremap <Leader>yf ggyG<C-o> " yank file
 nnoremap gs :Gstatus<CR>
 nnoremap gl :diffget //3<CR> 
 nnoremap gh :diffget //2<CR>
@@ -91,8 +94,10 @@ set splitbelow
 set splitright
 set shiftwidth=2
 set backupcopy=yes
+set smartindent
 
-colorscheme PaperColor
+
+colorscheme iceberg
 set background=light
 
 " -- CoC
