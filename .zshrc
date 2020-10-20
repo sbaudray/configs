@@ -1,8 +1,10 @@
 export ZSH=/home/sbaudray/.oh-my-zsh
 
+. /usr/share/autojump/autojump.sh
+
 plugins=(git vi-mode history-substring-search docker docker-compose)
 
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 DEFAULT_USER=`whoami`
 ENABLE_CORRECTION="false"
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -20,9 +22,12 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # export ARCHFLAGS="-arch x86_64"
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 PATH="$(yarn global bin):$PATH"
+PATH=~/.local/bin:$PATH
+PATH=/home/sbaudray/snap/flutter/common/flutter/bin:$PATH
 export PATH
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 alias tree='tree -I node_modules'
+alias ssudo='sudo -E env "PATH=$PATH"'
 
 . $HOME/.asdf/asdf.sh
 
